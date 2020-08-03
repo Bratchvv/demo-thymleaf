@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Hello Page</title>
+</head>
+<body th:inline="text">
+<header th:insert="fragments/header.html :: header"> </header>
+<div>
+    <h4 th:text="${helloMsg}">
+     Я тестовая страница!
+    </h4>
+    <h1>Hello это статичный текст и тут встречается вот это: [[${test.name}]], а потом продлжается статичный текст!</h1>
+    <p th:text="${users}">
+        users
+    </p>
+    <img style="width: 125px;
+                opacity: 0.5;
+                padding: 20px;"
+         src="/images/test.png"/>
+
+    <h1>Выражение с $</h1>
+    <ul>
+        <li>Name: <span th:text="${test.name}"></span></li>
+        <li>Value: <span th:text="${test.value}"></span></li>
+    </ul>
+
+    <h1>Выражение с *</h1>
+    <ul th:object="${test}">
+        <li>Name: <span th:text="*{name}"></span></li>
+        <li>Value: <span th:text="*{value}"></span></li>
+    </ul>
+
+
+    <h1>Выражение из properties</h1>
+    <h1 th:text="#{msg.hello}"></h1>
+    <h1 th:text="#{${localePrefix} + '.msg.hello'}">Hello</h1>
+    <h1 th:text="#{msg.hello.user(${test.name})}"></h1>
+
+
+    <a th:href="@{/home}">Home</a>
+    <a th:href="@{/messages(page=${page + 1})}">Messages</a>
+    <a th:href="@{/users/{id}/profile(id=${test.value})}">Profile</a>
+
+
+    <h1>Цикл</h1>
+    <ul>
+        <li th:each="item,i: ${testList}">
+            <span th:text="${i.count}"></span>
+            <span th:text="${item.name}"></span>
+            <span th:text="${item.value}"></span>
+        </li>
+    </ul>
+
+    <div th:if="${isManager}">
+        Добавить товар
+    </div>
+    <div th:unless="${expiredSession}">
+        Пользователь онлайн
+    </div>
+
+    <ul th:switch="${role}">
+        <li th:case="'admin'">Администратор</li>
+        <li th:case="#{app.roles.manager}">Менеджер</li>
+        <li th:case="*">Гость</li>
+    </ul>
+</div>
+<div th:replace="fragments/footer.html :: footer"></div>
+</body>
+</html>

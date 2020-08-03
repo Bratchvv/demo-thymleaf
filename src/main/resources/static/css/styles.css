@@ -1,0 +1,16 @@
+#myHeader
+ {
+ 	opacity: 0.5;
+ }
+
+ p
+ {
+ 	color: red;
+ }
+
+ .myBlock
+ {
+ 	background-color: #af2929;
+ 	font-size: 16px;
+ 	border: 18px solid #000;
+ }
